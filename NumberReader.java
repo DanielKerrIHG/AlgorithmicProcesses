@@ -104,7 +104,7 @@ public class NumberReader {
 		if (args.length > 0)
 			myNumberReader.processFile(args[0]);
 		else
-			myNumberReader.processFile("C:/apps/workspace/FileMovement/CS6423/src/edu/spsu/cs6423/Proj1/numbers.txt");
+			myNumberReader.processFile("./numbers.txt");
 	}
 
 	public int getSum() {
