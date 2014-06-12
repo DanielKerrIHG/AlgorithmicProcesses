@@ -40,7 +40,7 @@ public class PartTwoA {
             return 1;
         }
         else{
-            for(int i = 0; i < myArray.length; i++){
+            for(int i = 0; i < myArray.length - 1; i++){
                 // if the current number plus one does not equal the next number
                 // in the sequence, then the number after the current is missing
                 if((myArray[i] + 1) != myArray[i + 1]){
