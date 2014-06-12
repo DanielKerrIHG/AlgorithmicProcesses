@@ -72,6 +72,7 @@ public class PartTwoA {
         for(int i = 0; i < myArray.length; i++){
             System.out.print(myArray[i] + " ");
         }
+        System.out.println("");
     }
     
     /**

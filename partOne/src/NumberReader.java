@@ -27,28 +27,31 @@ public class NumberReader {
 	 * @param numberToAdd number sent from processFile to
 	 * added in from the processFile
 	 */
-	public void addNumbers (int numberToAdd) {
+	public void addNumbers (ArrayList<Integer> numberToAdd) {
 		// test the number with tempSum
-		int tempSum = getSum() + numberToAdd;
+		int beginIndex = 0;
+		int endIndex = 0;
 
-		// Add the number into the list of all numbers
-		getAllNumbers().add(new Integer(numberToAdd));
-
-		System.out.print("Adding number " + numberToAdd);
-		
-		// If the test sum is larger than the current sum
-		if (tempSum > getSum()) {
-			// Add the number to the list of numbers that were added
-			getNumberAdded().add(new Integer(numberToAdd));
-			// Set the new sum
-			setSum(tempSum);
-			//  If added, print that the number was added in.
-			System.out.println(" -- number added - new sum = " + getSum());
-		} else {
-			//  If not added, print that the number was not added in.
-			System.out.println(" -- Number NOT added");
+		for (int outerCounter = 0; outerCounter < numberToAdd.size(); outerCounter++) {
+			for (int innerCounter = outerCounter; innerCounter < numberToAdd.size(); innerCounter++){
+				int tempSum = 0;
+				
+				for (int summationCounter = outerCounter; summationCounter < innerCounter; summationCounter++){
+					tempSum += numberToAdd.get(summationCounter);
+				}
+				
+				if (tempSum > getSum()) {
+					setSum(tempSum);
+					beginIndex = outerCounter;
+					endIndex = innerCounter;
+				}
+			}
 		}
-			
+		
+		for (int i = beginIndex; i <= endIndex; i ++) {
+			getNumberAdded().add(getAllNumbers().get(i));
+		}
+
 	}
 	
 	/**
@@ -64,13 +67,10 @@ public class NumberReader {
 
 	        String line;
 	        while ((line = br.readLine()) != null) {
-	        	addNumbers (new Integer(line).intValue());
-	        	Thread.sleep(100);
+	        	getAllNumbers().add(new Integer(line));
 	        }
 	    } catch (IOException ex) {
 	    	System.out.println("IO Exception Occurred - " + ex.getLocalizedMessage());
-	    } catch (InterruptedException e) {
-			e.printStackTrace();
 		} finally {
 	        try {
 				br.close();
@@ -79,22 +79,24 @@ public class NumberReader {
 			}
 	    }
 	    
+    	addNumbers (getAllNumbers());
+	    
 	    System.out.println("All Numbers Processed");
 	    System.out.println();
-	    System.out.println("The largest suset sum is " + getSum());
+	    System.out.println("The largest subsequence sum is " + getSum());
 	    System.out.println("The sum was made with the following numbers: ");
 	    
 	    StringBuffer subSet = new StringBuffer();
 	    ArrayList<Integer> displayNumberAdded = getNumberAdded();
 	    
-	    Collections.sort(displayNumberAdded);
+//	    Collections.sort(displayNumberAdded);
 	    
 	    for (Integer number : displayNumberAdded) {
 	    	subSet.append(number).append(", ");
 	    }
 	    
 	    // Remove the comma;
-	    subSet.deleteCharAt(subSet.length() - 1);
+	    subSet.deleteCharAt(subSet.length() - 2);
 	    System.out.println(subSet.toString());
 	}
 	
@@ -104,7 +106,7 @@ public class NumberReader {
 		if (args.length > 0)
 			myNumberReader.processFile(args[0]);
 		else
-			myNumberReader.processFile("./numbers.txt");
+			myNumberReader.processFile("numbers.txt");
 	}
 
 	public int getSum() {
