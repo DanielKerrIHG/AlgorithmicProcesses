@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class Part3BFS {
     private BinaryNode ourTree = null;
-    LinkedList<BinaryNode> needleQueue = new LinkedList<>();
+    LinkedList<BinaryNode> needleQueue = new LinkedList<BinaryNode>();
 
     
     public void traverseOurTree(BinaryNode treeToTraverse) {
