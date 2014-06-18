@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
@@ -81,9 +83,10 @@ public class PartTwoA {
      */
     public void readFile(String fileName){
         BufferedReader br = null;
+        InputStream is = PartTwoA.class.getResourceAsStream(fileName);
         ArrayList<Integer> temp = new ArrayList<Integer>();
         try{
-            br = new BufferedReader(new FileReader(fileName));
+            br = new BufferedReader(new InputStreamReader(is));
             String line;
 	        while ((line = br.readLine()) != null) {
                     temp.add(new Integer(line).intValue());

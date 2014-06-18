@@ -42,7 +42,7 @@ public class Part3Max {
         Part3Max maximumTest  = new Part3Max();
         Integer maximumValue = 0;
 
-        if (arguments.length > 1)
+        if (arguments.length > 0)
             maximumTest.setOurTree(TreeFiller.buildTheTree(arguments[0]));
         else
             maximumTest.setOurTree(TreeFiller.buildTheTree("/numbers20.txt"));
