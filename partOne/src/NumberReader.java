@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -60,10 +62,10 @@ public class NumberReader {
 	 * @param fileName Name of the file to read from
 	 */
 	public void processFile (String fileName) {
-		
+		InputStream is = NumberReader.class.getResourceAsStream(fileName);
 		BufferedReader br = null;
 	    try {
-		    br = new BufferedReader(new FileReader(fileName));
+		    br = new BufferedReader(new InputStreamReader(is));
 
 	        String line;
 	        while ((line = br.readLine()) != null) {
@@ -106,7 +108,7 @@ public class NumberReader {
 		if (args.length > 0)
 			myNumberReader.processFile(args[0]);
 		else
-			myNumberReader.processFile("numbers.txt");
+			myNumberReader.processFile("numbers20.txt");
 	}
 
 	public int getSum() {
