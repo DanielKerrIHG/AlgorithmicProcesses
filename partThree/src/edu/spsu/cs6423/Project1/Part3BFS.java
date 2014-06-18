@@ -37,7 +37,7 @@ public class Part3BFS {
         if (arguments.length > 0)
             bfs.setOurTree(TreeFiller.buildTheTree(arguments[0]));
         else
-            bfs.setOurTree(TreeFiller.buildTheTree("C:/Users/kerrda/Documents/NetBeansProjects/Project1/build/classes/numbers.txt"));
+            bfs.setOurTree(TreeFiller.buildTheTree("/numbers20.txt"));
 
         System.out.println("The tree we are traversing: ");
         PrintTree.printTheTree(bfs.getOurTree(), 0);
@@ -47,6 +47,9 @@ public class Part3BFS {
             bfs.traverseOurTree(bfs.getOurTree());
             System.out.println();
         }
+        System.out.println("Our BFS traversal processes each node once, (the main operation is checking for null). \nThis means"
+                + " that it does n operations on an input of n plus the test for null at each leaf, \ngiving it a time"
+                + " complexity of n for best worst and average case.");
     }
 
     /**

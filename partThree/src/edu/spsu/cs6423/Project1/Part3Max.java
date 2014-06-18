@@ -45,7 +45,7 @@ public class Part3Max {
         if (arguments.length > 1)
             maximumTest.setOurTree(TreeFiller.buildTheTree(arguments[0]));
         else
-            maximumTest.setOurTree(TreeFiller.buildTheTree("C:/Users/kerrda/Documents/NetBeansProjects/Project1/build/classes/numbers.txt"));
+            maximumTest.setOurTree(TreeFiller.buildTheTree("/numbers20.txt"));
 
         if (maximumTest.getOurTree() != null)
             maximumValue = maximumTest.findMaximum(maximumTest.getOurTree());
@@ -53,6 +53,11 @@ public class Part3Max {
         System.out.println("The tree we are searching: ");
         PrintTree.printTheTree(maximumTest.getOurTree(), 0);
         System.out.println("The Maximum value from the list = " + maximumValue);
+        System.out.println("Since our binary tree is sorted, we need only traverse the \n"
+                + "height of the tree. In the worst case, we traverse through all nodes\n"
+                + "(as our tree is not balanced) giving us a big O of n. In the best\n"
+                + "and average case we need only traverse to the right most node\n"
+                + "giving us a big Omega and big Theta of log n.");
     }
 
     /**

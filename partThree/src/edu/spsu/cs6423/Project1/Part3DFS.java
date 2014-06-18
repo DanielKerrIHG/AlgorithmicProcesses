@@ -18,7 +18,7 @@ public class Part3DFS {
 
         preorder, inorder, postorder;
     }
-    public Stack<BinaryNode> treeStack = new Stack();
+    public Stack<BinaryNode> treeStack = new Stack<BinaryNode>();
 
     public void traverseUsingStack(BinaryNode treeToTraverse) {
 
@@ -76,7 +76,7 @@ public class Part3DFS {
         if (arguments.length > 0) {
             dfs.setOurTree(TreeFiller.buildTheTree(arguments[0]));
         } else {
-            dfs.setOurTree(TreeFiller.buildTheTree("C:/Users/kerrda/Documents/NetBeansProjects/Project1/build/classes/numbers.txt"));
+            dfs.setOurTree(TreeFiller.buildTheTree("/numbers20.txt"));
         }
 
         System.out.println("The tree we are traversing: ");
@@ -95,6 +95,11 @@ public class Part3DFS {
             System.out.print("Stack implementation dfs = ");
             dfs.traverseUsingStack(dfs.getOurTree());
             System.out.println();
+            System.out.println("We implemented our DFS traversal both with an actual"
+                    + " stack, and with the pre-order traversal (they wind up the same).\n"
+                    + "In both cases the main operation is checking for null, which we\n"
+                    + "do once for each node processed plus twice at each leaf. This gives\n"
+                    + "a time complexity of n for best, worst, and average case");
         }
     }
 

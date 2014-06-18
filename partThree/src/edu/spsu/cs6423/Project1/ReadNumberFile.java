@@ -3,6 +3,8 @@ package edu.spsu.cs6423.Project1;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -17,10 +19,11 @@ public class ReadNumberFile {
 
     public static ArrayList<Integer> readThis(String fileName) {
         BufferedReader br = null;
+        InputStream is = ReadNumberFile.class.getResourceAsStream(fileName);
         ArrayList<Integer> numberFromFile = new ArrayList<Integer>();
 
         try {
-            br = new BufferedReader(new FileReader(fileName));
+            br = new BufferedReader(new InputStreamReader(is));
 
             String line;
             while ((line = br.readLine()) != null) {
