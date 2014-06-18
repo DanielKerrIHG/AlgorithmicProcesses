@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package algorithmsparttwob;
 
@@ -32,18 +27,26 @@ public class PartTwoB {
      * @return the integer that is missing from the array
      */
     public int divideAndConquerSearch(){
+        // This is more or less the standard binary search algorithm, but it never
+        // terminates early (as it isn't looking for a key)
         int left = 0;
         int right = myArray.length;
         int middle = 0;
         while(left < right){
             middle = (right + left) / 2;
+            // in the case that the element at index middle == the value of middle + 1
+            // then we have not reached the missing element in the array
             if(myArray[middle] == middle + 1){
                 left = middle + 1;                
             }
+            // The alternative is that the element at index middle == the value
+            // of middle + 2, which means that we have already passed the missing
+            // element.
             else{
                 right = middle;
             }
         }
+        //note that we could return right + 1 here as well, it terminates when they are ==
         return left + 1;
         
     }
@@ -56,8 +59,7 @@ public class PartTwoB {
      */
     public void displayResults(int missingNumber){
         if(missingNumber == -1){
-            System.out.println("I can't seem to find the missing Integer. It is"
-                    + "possible it is at the end of the Array?");
+            System.out.println("I can't seem to find the missing Integer. ");
         }
         else{
             System.out.println("The missing Integer is " + missingNumber + ".");
@@ -68,6 +70,11 @@ public class PartTwoB {
             System.out.print(myArray[i] + " ");
         }
         System.out.println("");
+        System.out.println("The time complexity of this item should be similar to "
+                + "that of binary search (which it is based on).\n Like Binary search"
+                + " it eliminates half of the remaing search space on each iteration"
+                + ". Unlike binary search, it never terminates early-- so it always"
+                + " is log n time complexity.");
     }
     
     /**
@@ -99,8 +106,8 @@ public class PartTwoB {
     }
     
     /**
-     * generateArray generates an array of size numberOfFullArray - 2, from 1 to
-     * numberOfFullArray -1, but with one number randomly missing.
+     * generateArray generates an array of size numberOfFullArray - 1, from 1 to
+     * numberOfFullArray, but with one number randomly missing.
      * @param numberOfFullArray the size of the array to create (not including 
      * the missing element: so an input of 5 will create an array with 4 elements)
      */
@@ -120,14 +127,12 @@ public class PartTwoB {
     public static void main(String[] args){
         PartTwoB myPartTwoB = new PartTwoB();
         if(args.length != 2){
-            System.out.println("This application expects two commandline arguments:");
-            System.out.println("The first argument tells the application whether or not");
-            System.out.println("you want to use a file as input, or if you want to");
-            System.out.println("randomly generate the array. The second argument is");
-            System.out.println("either the file name to input or the number of elements");
-            System.out.println("(Not including the missing element) you want the");
-            System.out.println("randomly generated array to contain. The first argument");
-            System.out.println("should either be 'file' or 'random'.");
+            int missingNumber;
+            System.out.println("Generating an array with elements 1 through 10 with "
+                    + "one randomly missing.");
+            myPartTwoB.generateArray(10);
+            missingNumber = myPartTwoB.divideAndConquerSearch();
+            myPartTwoB.displayResults(missingNumber);
         }
         else if((args[0].toLowerCase()).equals("file")){
             int missingNumber;

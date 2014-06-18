@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package algorithmsparttwo;
 
@@ -21,7 +16,7 @@ import java.util.logging.Logger;
  * Project 1: Part 2A - Brute Force Find the Missing Number
  * Daniel Kerr and Charles So
  * Date: 06/20/2014
- * File: NumberReader.java
+ * File: PartTwoA.java
  */
 public class PartTwoA {
     
@@ -48,8 +43,11 @@ public class PartTwoA {
                     
                 }
             }
-            // If we don't find a missing number (could possibly be the case that
-            // the last number is missing?:
+            //Case for missing at the end
+            if(myArray[myArray.length - 1] == (myArray.length )){
+                return myArray.length + 1;
+            }
+            // If we don't find a missing number 
             return -1;
         }
     }
@@ -61,8 +59,7 @@ public class PartTwoA {
      */
     public void displayResults(int missingNumber){
         if(missingNumber == -1){
-            System.out.println("I can't seem to find the missing Integer. It is"
-                    + "possible it is at the end of the Array?");
+            System.out.println("I can't seem to find the missing Integer.");
         }
         else{
             System.out.println("The missing Integer is " + missingNumber + ".");
@@ -73,6 +70,8 @@ public class PartTwoA {
             System.out.print(myArray[i] + " ");
         }
         System.out.println("");
+        System.out.println("The time complexity of the brute force version of this " +
+                "algorithm is 0(n)-- it makes n + 1 comparisons each run through.");
     }
     
     /**
@@ -127,14 +126,11 @@ public class PartTwoA {
     public static void main(String[] args){
         PartTwoA myPartTwoA = new PartTwoA();
         if(args.length != 2){
-            System.out.println("This application expects two commandline arguments:");
-            System.out.println("The first argument tells the application whether or not");
-            System.out.println("you want to use a file as input, or if you want to");
-            System.out.println("randomly generate the array. The second argument is");
-            System.out.println("either the file name to input or the number of elements");
-            System.out.println("(Not including the missing element) you want the");
-            System.out.println("randomly generated array to contain. The first argument");
-            System.out.println("should either be 'file' or 'random'.");
+            System.out.println("Generating an array from 1 to 10 with one randomly missing.");
+            int missingNumber;
+            myPartTwoA.generateArray(10);
+            missingNumber = myPartTwoA.exhaustiveSearch();
+            myPartTwoA.displayResults(missingNumber);
         }
         else if((args[0].toLowerCase()).equals("file")){
             int missingNumber;
@@ -153,7 +149,7 @@ public class PartTwoA {
             System.out.println("argument. Use either 'file' followed by the file name");
             System.out.println("to generate the array to search via file input OR");
             System.out.println("use 'random' followed by the number of elements in");
-            System.out.println("the array (not including the missing element)");
+            System.out.println("the array (not taking into account the missing element)");
         }
     }
 }
